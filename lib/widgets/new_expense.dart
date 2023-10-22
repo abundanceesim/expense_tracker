@@ -57,7 +57,14 @@ class _NewExpenseState extends State<NewExpense> {
       return;
     }
     // _selectedDate can be null so the exclamation mark indicates that it's required.
-    widget.onAddExpense(Expense(title: _titleController.text, amount: enteredAmount, date: _selectedDate!, category: _selectedCategory));
+    widget.onAddExpense(Expense(
+        title: _titleController.text,
+        amount: enteredAmount,
+        date: _selectedDate!,
+        category: _selectedCategory));
+
+    // Close widget after successful add.
+    Navigator.pop(context);
   }
 
   @override
@@ -70,7 +77,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       child: Column(children: [
         TextField(
           controller: _titleController,

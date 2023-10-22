@@ -34,7 +34,11 @@ class _ExpenseState extends State<Expenses> {
   void _openAddExpenseOverlay() {
     // ctx is the context for just the ModalBottomSheet,
     // context is the context for the main widget in this class.
-    showModalBottomSheet(context: context, builder: (ctx) => NewExpense(onAddExpense: _addExpense));
+    showModalBottomSheet(
+        // make modal open in fullscreen.
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) => NewExpense(onAddExpense: _addExpense));
   }
 
   // void _addExpense(expenseData) {
@@ -44,7 +48,7 @@ class _ExpenseState extends State<Expenses> {
   //       date: expenseData['date'], category: expenseData['category']);
   //   setState(() {
   //   _registeredExpenses.add(newExpense);
-      
+
   //   });
   // }
 
