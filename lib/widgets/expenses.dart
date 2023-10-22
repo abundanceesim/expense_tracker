@@ -32,9 +32,26 @@ class _ExpenseState extends State<Expenses> {
   ];
 
   void _openAddExpenseOverlay() {
-    // ctx is the context for just the ModalBottomSheet, 
+    // ctx is the context for just the ModalBottomSheet,
     // context is the context for the main widget in this class.
-    showModalBottomSheet(context: context, builder: (ctx) => NewExpense());
+    showModalBottomSheet(context: context, builder: (ctx) => NewExpense(onAddExpense: _addExpense));
+  }
+
+  // void _addExpense(expenseData) {
+  //   final newExpense = Expense(
+  //       title: expenseData['title'],
+  //       amount: expenseData['amount'],
+  //       date: expenseData['date'], category: expenseData['category']);
+  //   setState(() {
+  //   _registeredExpenses.add(newExpense);
+      
+  //   });
+  // }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
@@ -42,8 +59,7 @@ class _ExpenseState extends State<Expenses> {
     return Scaffold(
       appBar: AppBar(title: const Text('Expense Tracker'), actions: [
         IconButton(
-            onPressed: _openAddExpenseOverlay, 
-            icon: const Icon(Icons.add))
+            onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
       ]),
       body: Column(children: [
         const Text('Chart'),
