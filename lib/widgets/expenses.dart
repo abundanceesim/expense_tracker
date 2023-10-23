@@ -17,18 +17,18 @@ class Expenses extends StatefulWidget {
 class _ExpenseState extends State<Expenses> {
 // Obj list from Expense model
   final List<Expense> _registeredExpenses = [
-    // Expense(
-    //   title: 'Flutter Course',
-    //   amount: 19.99,
-    //   date: DateTime.now(), //current date-time
-    //   category: Category.work,
-    // ),
-    // Expense(
-    //   title: 'Cinema',
-    //   amount: 15.69,
-    //   date: DateTime.now(),
-    //   category: Category.leisure,
-    // ),
+    Expense(
+      title: 'Flutter Course',
+      amount: 19.99,
+      date: DateTime.now(), //current date-time
+      category: Category.work,
+    ),
+    Expense(
+      title: 'Cinema',
+      amount: 15.69,
+      date: DateTime.now(),
+      category: Category.leisure,
+    ),
   ];
 
   void _openAddExpenseOverlay() {
