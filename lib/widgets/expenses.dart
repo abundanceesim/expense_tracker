@@ -36,10 +36,12 @@ class _ExpenseState extends State<Expenses> {
     // ctx is the context for just the ModalBottomSheet,
     // context is the context for the main widget in this class.
     showModalBottomSheet(
-        // make modal open in fullscreen.
-        isScrollControlled: true,
-        context: context,
-        builder: (ctx) => NewExpense(onAddExpense: _addExpense));
+      // make modal open in fullscreen.
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
+      constraints: const BoxConstraints(maxWidth: double.infinity),
+    );
   }
 
   void _addExpense(Expense expense) {
@@ -77,6 +79,8 @@ class _ExpenseState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     Widget mainContent = const Center(
         child: Text('No expenses found. Please an expense to get started.'));
 
@@ -88,19 +92,28 @@ class _ExpenseState extends State<Expenses> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expense Tracker'),
-        actions: [
-          IconButton(
-            onPressed: _openAddExpenseOverlay,
-            icon: const Icon(Icons.add),
-          )
-        ],
-      ),
-      body: Column(
-        children: [Chart(expenses: _registeredExpenses), Expanded(child: mainContent)],
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('Expense Tracker'),
+          actions: [
+            IconButton(
+              onPressed: _openAddExpenseOverlay,
+              icon: const Icon(Icons.add),
+            )
+          ],
+        ),
+        body: width < 600
+            ? Column(
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(child: mainContent),
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(child: Chart(expenses: _registeredExpenses)),
+                  Expanded(child: mainContent),
+                ],
+              ));
   }
 }
 
